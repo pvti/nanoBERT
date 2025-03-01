@@ -71,7 +71,7 @@ class BERTClassifier(nn.Module):
         ff_dim,
         num_classes=2,
         max_len=512,
-        dropout=0.1,
+        dropout=0.0,
     ):
         super().__init__()
         self.embedding = nn.Embedding(vocab_size, hidden_size)

@@ -16,13 +16,13 @@ def get_parser():
         "--hidden_size", type=int, default=128, help="Hidden layer size"
     )
     parser.add_argument(
-        "--num_layers", type=int, default=4, help="Number of transformer layers"
+        "--num_layers", type=int, default=8, help="Number of transformer layers"
     )
     parser.add_argument(
         "--num_heads", type=int, default=4, help="Number of attention heads"
     )
     parser.add_argument(
-        "--ffn_dim", type=int, default=256, help="Feedforward network dimension"
+        "--ffn_dim", type=int, default=512, help="Feedforward network dimension"
     )
     parser.add_argument("--dropout", type=float, default=0.0, help="Dropout rate")
     parser.add_argument(
