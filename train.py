@@ -24,7 +24,7 @@ def get_parser():
     parser.add_argument(
         "--ffn_dim", type=int, default=256, help="Feedforward network dimension"
     )
-    parser.add_argument("--dropout", type=float, default=0.1, help="Dropout rate")
+    parser.add_argument("--dropout", type=float, default=0.0, help="Dropout rate")
     parser.add_argument(
         "--epochs", type=int, default=5, help="Number of training epochs"
     )
@@ -82,7 +82,12 @@ def main():
     parser = get_parser()
     args = parser.parse_args()
 
-    wandb.init(project="nanoBERT-SST2", config=vars(args))
+    name = f"{args.num_layers}-{args.ffn_dim}-{args.dropout}"
+    wandb.init(
+        project="nanoBERT-SST2",
+        name=name,
+        config=vars(args),
+    )
 
     train_loader, test_loader, tokenizer = load_data(batch_size=args.batch_size)
 
@@ -124,7 +129,7 @@ def main():
         )
 
     os.makedirs(args.ckpt, exist_ok=True)
-    save_path = os.path.join(args.ckpt, f"{args.num_layers}-{acc_best:.4f}-model.pth")
+    save_path = os.path.join(args.ckpt, f"{name}-{acc_best:.4f}.pth")
     torch.save(model_best.state_dict(), save_path)
     wandb.finish()
 
